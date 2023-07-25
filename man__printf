@@ -1,0 +1,95 @@
+.TH _printf 1 "July 2023" "Version 1.0" "_printf man page"
+
+.SH NAME
+_printf - Format and print data
+
+.SH SYNOPSIS
+#include <stdio.h>
+#include <stdarg.h>
+
+int printf(const char *format, ...);
+
+.SH DESCRIPTION
+The `_printf` function produces output according to a format string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of stdarg(3)) are converted for output.
+
+.IP
+The format string may contain regular characters and conversion specifiers, which start with the percent symbol (%). Each conversion specifier begins with % and ends with a conversion character that specifies the type of conversion to be applied. The supported conversion specifiers are:
+
+.SS CONVERSION SPECIFIERS:
+.RS
+.IP %d, %i
+Decimal signed integer. The int argument is converted to signed decimal notation.
+
+.IP %c
+Character. The int argument is converted to an unsigned char, and the resulting character is written.
+
+.IP %s
+The const char * argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written up to (but not including) a terminating null byte ('\0').
+
+.IP %o, %u, %x, %X
+The unsigned int argument is converted to unsigned octal (o), unsigned decimal (u), or unsigned hexadecimal (x and X) notation. The letters abcdef are used for x conversions, and the letters ABCDEF are used for X conversions.
+
+.IP %p
+The void * pointer argument is printed in hexadecimal (as if by %#x or %#lx).
+
+.IP %b
+Custom conversion: Decimal signed integer. The int argument is converted to binary notation.
+
+.IP %r
+Custom conversion: The const char * argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written in reverse order.
+
+.IP %R
+Custom conversion: The const char * argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written in ROT13 format.
+
+.RE
+
+.SH RETURN VALUE
+.RS
+The `_printf` function returns the number of characters printed (excluding the null byte used to end output to strings) upon successful execution.
+
+If an output error is encountered, a negative value (-1) is returned.
+
+.RE
+
+.SH EXAMPLES
+.SS Basic Usage:
+.RS
+.IP
+_printf("Character[%c]: %c", 'C', 'A');
+.RE
+.IP
+Output:
+.RS
+Character[C]: A
+.RE
+
+.SS Literal String:
+.RS
+.IP
+_printf("Let's try to printf a simple sentence");
+.RE
+.IP
+Output:
+.RS
+Let's try to printf a simple sentence
+.RE
+
+.SS Integers[%i]:
+.RS
+.IP
+_printf("This is a number: [%i]", 20);
+.RE
+.IP
+Output:
+.RS
+This is a number: [20]
+.RE
+
+.SH SEE ALSO
+.I printf(3)
+
+.SH BUGS
+To report any buggs, kindly report an issue to the github reopsitory [https://github.com/stdjes/printf/issues]
+
+.SH AUTHORS
+Stephen Eze and Micahel Nketia, (C) 2023 - ALX Cohort 16.
